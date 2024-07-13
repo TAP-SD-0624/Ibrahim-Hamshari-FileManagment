@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Create New Item</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File List</title>
+  <link rel="stylesheet" href="/public/createStyles.css">
+  <script src="/public/createScripts.js" defer></script>
+  <link rel="icon" href="data:," />
+</head>
+
+<body>
+  <div class="container">
+    <h2>Create New Item</h2>
+    <form action="/create/<%= currPath %>" method="POST">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="type">Type</label>
+        <select id="type" name="type" required>
+          <option value="file">File</option>
+          <option value="dir">Directory</option>
+        </select>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <label for="data" >Data</label>
+        <textarea type="text" id="data" name="data" required></textarea>
+
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+</body>
+
+</html>

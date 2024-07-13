@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File List</title>
+    <link rel="stylesheet" href="/public/styles.css">
+    <script src="/public/scripts.js" defer></script>
+    <link rel="icon" href="data:," />
+
+</head>
+
+<body>
+    <div class="container">
+        <h1><a href="/">File List</a></h1>
+        <a href="/create/<%= currPath %>" class="add-button">+</a>
+        <div class="search-bar">
+            <input type="text" id="searchInput" name="name" placeholder="Search files...">
+        </div>
+        See the uploaded files <a href="/files">Here</a>
+        <p>Current Path: <%= currPath %></p>
+        <% if (data && data.length > 0) { %>
+            <table id="fileTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(file => { %>
+                        <tr>
+                            <td><a href="/<%= currPath ? currPath + '/' : '' %><%= file.name %>"><%= file.name %></a></td>
+                            <td><%= file.type %></td>
+                            <td class="buttons">
+                                <button onclick="confirmDelete('<%= file.name %>')">Delete</button>
+                                <button onclick="changeName('<%= file.name %>')">Change Name</button>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No files found.</p>
+        <% } %>
+    </div>
+
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete this file?</p>
+            <form id="deleteForm" method="DELETE" action="/<%= currPath %>" onsubmit="deleteElement(event)">
+                <input type="hidden" name="name" id="deleteFileName">
+                <button type="submit">Confirm</button>
+                <button type="button" onclick="closeModal('deleteModal')">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="changeNameModal" class="modal">
+        <div class="modal-content">
+            <p>Please enter the new name:</p>
+            <form id="changeNameForm" method="PATCH" action="/<%= currPath %>" onsubmit="patchElement(event)">
+                <input type="hidden" name="oldName" id="oldFileName" required>
+                <input type="text" name="name" id="newFileName" required>
+                <button type="submit">Save</button>
+                <button type="button" onclick="closeModal('changeNameModal')">Cancel</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

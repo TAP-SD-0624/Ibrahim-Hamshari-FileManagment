@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+    <link rel="stylesheet" href="/public/styles.css">
+    <script src="/public/scripts.js" defer></script>
+    <link rel="icon" href="data:,">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Upload File</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="fileName">File Name:</label>
+                <input type="text" id="fileName" name="fileName" required>
+            </div>
+            <div class="form-group">
+                <label for="file">Choose File:</label>
+                <input type="file" id="file" name="file" required>
+            </div>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</body>
+
+</html>

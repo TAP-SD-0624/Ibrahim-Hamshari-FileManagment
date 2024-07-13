@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File List</title>
+    <link rel="stylesheet" href="/public/styles.css">
+    <script src="/public/scripts.js" defer></script>
+    <link rel="icon" href="data:,">
+</head>
+
+<body>
+    <div class="container">
+        <h1><a href="/">File List</a></h1>
+        <a href="/upload" class="add-button">+</a>
+        See the files <a href="/">Here</a>
+        <% if (data && data.length > 0) { %>
+            <table id="fileTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(file => { %>
+                        <tr>
+                            <td><a href="/files/<%= file %>"><%= file %></a></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No files found.</p>
+        <% } %>
+    </div>
+
+    
+</body>
+
+</html>
